@@ -2,7 +2,8 @@ name: Build Forge Mod
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+     - main
 
 jobs:
   build:
