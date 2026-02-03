@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=lower": { "model": "examplemod:block/mushroom_support_lower" },
+    "half=upper": { "model": "examplemod:block/mushroom_support_upper" }
+  }
+}

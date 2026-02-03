@@ -1,5 +1,7 @@
 package com.example.examplemod;
 
+import com.example.examplemod.content.ModBlocks;
+import com.example.examplemod.content.ModItems;
 import com.example.examplemod.livecode.LiveCodeConfig;
 import com.example.examplemod.livecode.LiveCodeRuntime;
 import com.mojang.logging.LogUtils;
@@ -51,11 +53,18 @@ public class ExampleMod
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(EXAMPLE_ITEM.get());
+                output.accept(ModItems.GRAVE.get());
+                output.accept(ModItems.MUSHROOM_SUPPORT.get());
+                output.accept(ModItems.WOODEN_SUPPORT.get());
+                output.accept(ModItems.UNLIT_CAMPFIRE.get());
             }).build());
 
     public ExampleMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModBlocks.bootstrap();
+        ModItems.bootstrap();
 
         modEventBus.addListener(this::commonSetup);
 

@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "minecraft:block/mushroom_stem",
+    "down": "minecraft:block/mushroom_stem",
+    "up": "minecraft:block/mushroom_stem",
+    "north": "minecraft:block/mushroom_stem",
+    "south": "minecraft:block/mushroom_stem",
+    "west": "minecraft:block/mushroom_stem",
+    "east": "minecraft:block/mushroom_stem"
+  },
+  "elements": [
+    {
+      "from": [5, 0, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "down": {"uv": [0, 0, 16, 16], "texture": "#down"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#up"},
+        "north": {"uv": [0, 0, 16, 16], "texture": "#north"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#south"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#west"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#east"}
+      }
+    },
+    {
+      "from": [3, 12, 3],
+      "to": [13, 16, 13],
+      "faces": {
+        "down": {"uv": [0, 0, 16, 16], "texture": "#down"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#up"},
+        "north": {"uv": [0, 0, 16, 16], "texture": "#north"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#south"},
+        "west": {"uv": [0, 0, 16, 16], "texture": "#west"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#east"}
+      }
+    }
+  ]
+}
