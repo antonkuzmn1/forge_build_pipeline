@@ -1,3 +1,5 @@
+// test
+
 package com.example.examplemod;
 
 import net.minecraft.resources.ResourceLocation;
