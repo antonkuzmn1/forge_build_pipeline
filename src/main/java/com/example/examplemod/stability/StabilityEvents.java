@@ -45,18 +45,15 @@ public final class StabilityEvents {
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
 
-        if (!StabilityManager.isSafe(level, pos)) {
-            Crumble.collapseAbove(level, pos);
-        }
-
         if (state.getBlock() instanceof GraveBlock) {
             StabilityManager.unregisterCenter(level, pos);
-            return;
-        }
-
-        if (state.getBlock() instanceof SupportBlock) {
+        } else if (state.getBlock() instanceof SupportBlock) {
             BlockPos lower = state.getValue(SupportBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
             StabilityManager.unregisterCenter(level, lower);
+        }
+
+        if (!StabilityManager.isSafe(level, pos)) {
+            Crumble.trigger(level, pos);
         }
     }
 }

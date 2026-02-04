@@ -4,6 +4,7 @@ import com.example.examplemod.stability.StabilityManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -76,13 +77,8 @@ public final class SupportBlock extends Block {
             return null;
         }
         BlockPos above = pos.above();
-        BlockPos ceiling = above.above();
         BlockState aboveState = level.getBlockState(above);
         if (!aboveState.canBeReplaced(context)) {
-            return null;
-        }
-        BlockState ceilingState = level.getBlockState(ceiling);
-        if (!ceilingState.isFaceSturdy(level, ceiling, Direction.DOWN)) {
             return null;
         }
         return this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER);
@@ -94,22 +90,37 @@ public final class SupportBlock extends Block {
     }
 
     @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, level, pos, oldState, movedByPiston);
+        if (!level.isClientSide && state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            level.scheduleTick(pos, this, 1);
+        }
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(HALF) != DoubleBlockHalf.LOWER) {
+            return;
+        }
+        BlockState above = level.getBlockState(pos.above());
+        if (above.getBlock() != this || above.getValue(HALF) != DoubleBlockHalf.UPPER) {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 35);
+        }
+    }
+
+    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         DoubleBlockHalf half = state.getValue(HALF);
         if (half == DoubleBlockHalf.UPPER) {
             BlockState below = level.getBlockState(pos.below());
-            if (below.getBlock() != this || below.getValue(HALF) != DoubleBlockHalf.LOWER) {
-                return false;
-            }
-            BlockState above = level.getBlockState(pos.above());
-            return above.isFaceSturdy(level, pos.above(), Direction.DOWN);
+            return below.getBlock() == this && below.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
         BlockState below = level.getBlockState(pos.below());
         if (!below.isFaceSturdy(level, pos.below(), Direction.UP)) {
             return false;
         }
         BlockState above = level.getBlockState(pos.above());
-        return above.getBlock() == this && above.getValue(HALF) == DoubleBlockHalf.UPPER;
+        return above.isAir() || (above.getBlock() == this && above.getValue(HALF) == DoubleBlockHalf.UPPER);
     }
 
     @Override
@@ -123,6 +134,9 @@ public final class SupportBlock extends Block {
         }
 
         if (half == DoubleBlockHalf.LOWER && direction == Direction.UP) {
+            if (neighborState.isAir()) {
+                return state;
+            }
             if (neighborState.getBlock() != this || neighborState.getValue(HALF) != DoubleBlockHalf.UPPER) {
                 return Blocks.AIR.defaultBlockState();
             }
