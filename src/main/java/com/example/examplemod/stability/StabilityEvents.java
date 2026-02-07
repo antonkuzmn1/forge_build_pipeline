@@ -45,19 +45,16 @@ public final class StabilityEvents {
 
     @SubscribeEvent
     public static void onBreak(BlockEvent.BreakEvent event) {
-        if (!(event.getLevel() instanceof ServerLevel level)) {
-            return;
-        }
-
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
         BlockPos pos = event.getPos();
         BlockState state = event.getState();
-
         if (state.getBlock() instanceof GraveBlock) {
             StabilityManager.unregisterCenter(level, pos);
         } else if (state.getBlock() instanceof SupportBlock) {
             BlockPos lower = state.getValue(SupportBlock.HALF) == DoubleBlockHalf.LOWER ? pos : pos.below();
             StabilityManager.unregisterCenter(level, lower);
         }
+        Crumble.trigger(level, pos);
     }
 
     @SubscribeEvent

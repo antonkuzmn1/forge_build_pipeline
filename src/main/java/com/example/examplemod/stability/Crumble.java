@@ -49,6 +49,9 @@ public final class Crumble {
             if (!isCrumbleBlock(st)) {
                 break;
             }
+            if (StabilityManager.isSafe(level, m.immutable())) {
+                break;
+            }
             BlockPos below = m.below();
             if (!level.getBlockState(below).isAir()) {
                 break;

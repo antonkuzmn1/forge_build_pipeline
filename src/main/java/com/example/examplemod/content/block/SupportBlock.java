@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public final class SupportBlock extends Block {
     public enum SupportType {
         MUSHROOM(1),
-        WOODEN(5);
+        WOODEN(1);
 
         private final int radius;
 
