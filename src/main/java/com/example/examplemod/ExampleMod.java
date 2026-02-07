@@ -56,7 +56,6 @@ public class ExampleMod
                 output.accept(ModItems.GRAVE.get());
                 output.accept(ModItems.MUSHROOM_SUPPORT.get());
                 output.accept(ModItems.WOODEN_SUPPORT.get());
-                output.accept(ModItems.ROOTED_SOIL.get());
             }).build());
 
     public ExampleMod(FMLJavaModLoadingContext context)

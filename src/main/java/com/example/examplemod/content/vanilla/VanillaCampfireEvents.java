@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +22,10 @@ public final class VanillaCampfireEvents {
             return;
         }
 
+        if (event.getItemInHand() == null || !event.getItemInHand().is(Items.CAMPFIRE)) {
+            return;
+        }
+
         BlockState state = event.getPlacedBlock();
         if (!state.is(Blocks.CAMPFIRE)) {
             return;
@@ -30,12 +35,6 @@ public final class VanillaCampfireEvents {
         BlockState newState = state;
         if (newState.hasProperty(CampfireBlock.LIT)) {
             newState = newState.setValue(CampfireBlock.LIT, false);
-        }
-        if (newState.hasProperty(CampfireBlock.SIGNAL_FIRE)) {
-            newState = newState.setValue(CampfireBlock.SIGNAL_FIRE, false);
-        }
-        if (newState.hasProperty(CampfireBlock.WATERLOGGED)) {
-            newState = newState.setValue(CampfireBlock.WATERLOGGED, false);
         }
 
         if (newState != state) {
