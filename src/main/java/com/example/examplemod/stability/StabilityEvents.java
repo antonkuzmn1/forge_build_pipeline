@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = ExampleMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class StabilityEvents {
-    private static final int CHECK_INTERVAL_TICKS = 20;
-    private static final int CHUNK_RADIUS = 1;
+    private static final int CHECK_INTERVAL_TICKS = 10;
+    private static final int CHUNK_RADIUS = 2;
     private static final Long2LongOpenHashMap lastCheckByChunk = new Long2LongOpenHashMap();
 
     private StabilityEvents() {
@@ -59,15 +59,9 @@ public final class StabilityEvents {
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) {
-            return;
-        }
-
+        if (event.phase != TickEvent.Phase.END) return;
         long gameTime = event.getServer().overworld().getGameTime();
-        if (gameTime % CHECK_INTERVAL_TICKS != 0) {
-            return;
-        }
-
+        if (gameTime % CHECK_INTERVAL_TICKS != 0) return;
         for (ServerLevel level : event.getServer().getAllLevels()) {
             for (ServerPlayer player : level.players()) {
                 BlockPos p = player.blockPosition();
@@ -77,19 +71,12 @@ public final class StabilityEvents {
                     for (int dcz = -CHUNK_RADIUS; dcz <= CHUNK_RADIUS; dcz++) {
                         int cx = pcx + dcx;
                         int cz = pcz + dcz;
+                        if (!level.hasChunk(cx, cz)) continue;
                         long key = (((long) cx) << 32) ^ (cz & 0xffffffffL);
                         long last = lastCheckByChunk.getOrDefault(key, Long.MIN_VALUE);
-                        if (gameTime - last < CHECK_INTERVAL_TICKS) {
-                            continue;
-                        }
+                        if (gameTime - last < CHECK_INTERVAL_TICKS) continue;
                         lastCheckByChunk.put(key, gameTime);
-
-                        int x = (cx << 4) + 8;
-                        int z = (cz << 4) + 8;
-                        BlockPos origin = new BlockPos(x, p.getY(), z);
-                        if (!StabilityManager.isSafe(level, origin)) {
-                            Crumble.trigger(level, origin);
-                        }
+                        Crumble.triggerChunk(level, cx, cz);
                     }
                 }
             }
