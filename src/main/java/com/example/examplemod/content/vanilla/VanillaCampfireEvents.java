@@ -1,4 +1,3 @@
-// сып блоками
 package com.example.examplemod.content.vanilla;
 
 import com.example.examplemod.ExampleMod;
