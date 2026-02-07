@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "half=0,shell_type=0": {"model": "examplemod:block/shell_block_full"},
+    "half=0,shell_type=1": {"model": "examplemod:block/shell_block_full"},
+    "half=0,shell_type=2": {"model": "examplemod:block/shell_block_full"},
+    "half=1,shell_type=0": {"model": "examplemod:block/shell_block_half", "y": 0},
+    "half=1,shell_type=1": {"model": "examplemod:block/shell_block_half", "y": 0},
+    "half=1,shell_type=2": {"model": "examplemod:block/shell_block_half", "y": 0},
+    "half=2,shell_type=0": {"model": "examplemod:block/shell_block_half", "y": 90},
+    "half=2,shell_type=1": {"model": "examplemod:block/shell_block_half", "y": 90},
+    "half=2,shell_type=2": {"model": "examplemod:block/shell_block_half", "y": 90},
+    "half=3,shell_type=0": {"model": "examplemod:block/shell_block_half", "y": 180},
+    "half=3,shell_type=1": {"model": "examplemod:block/shell_block_half", "y": 180},
+    "half=3,shell_type=2": {"model": "examplemod:block/shell_block_half", "y": 180},
+    "half=4,shell_type=0": {"model": "examplemod:block/shell_block_half", "y": 270},
+    "half=4,shell_type=1": {"model": "examplemod:block/shell_block_half", "y": 270},
+    "half=4,shell_type=2": {"model": "examplemod:block/shell_block_half", "y": 270}
+  }
+}

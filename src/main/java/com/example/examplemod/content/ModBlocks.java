@@ -2,6 +2,7 @@ package com.example.examplemod.content;
 
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.content.block.GraveBlock;
+import com.example.examplemod.content.block.ShellBlock;
 import com.example.examplemod.content.block.SupportBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -16,6 +17,8 @@ public final class ModBlocks {
 
     public static final RegistryObject<Block> WOODEN_SUPPORT = ExampleMod.BLOCKS.register("wooden_support", () -> new SupportBlock(SupportBlock.SupportType.WOODEN, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.0F).sound(SoundType.WOOD).noOcclusion()));
 
+    public static final RegistryObject<Block> SHELL_BLOCK = ExampleMod.BLOCKS.register("shell_block", () -> new ShellBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(50.0F, 1200.0F).sound(SoundType.STONE)));
+
     private ModBlocks() {
     }
 
@@ -23,5 +26,6 @@ public final class ModBlocks {
         GRAVE.getId();
         MUSHROOM_SUPPORT.getId();
         WOODEN_SUPPORT.getId();
+        SHELL_BLOCK.getId();
     }
 }

@@ -2,6 +2,7 @@ package com.example.examplemod;
 
 import com.example.examplemod.content.ModBlocks;
 import com.example.examplemod.content.ModItems;
+import com.example.examplemod.content.entity.ModEntities;
 import com.example.examplemod.livecode.LiveCodeConfig;
 import com.example.examplemod.livecode.LiveCodeRuntime;
 import com.mojang.logging.LogUtils;
@@ -56,6 +57,9 @@ public class ExampleMod
                 output.accept(ModItems.GRAVE.get());
                 output.accept(ModItems.MUSHROOM_SUPPORT.get());
                 output.accept(ModItems.WOODEN_SUPPORT.get());
+                output.accept(ModItems.SHELL_BLOCK.get());
+                output.accept(ModItems.SHELL.get());
+                output.accept(ModItems.LARVA_BUCKET.get());
             }).build());
 
     public ExampleMod(FMLJavaModLoadingContext context)
@@ -67,6 +71,7 @@ public class ExampleMod
 
         modEventBus.addListener(this::commonSetup);
 
+        ModEntities.ENTITY_TYPES.register(modEventBus);
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
