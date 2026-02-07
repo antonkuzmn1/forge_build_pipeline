@@ -1,8 +1,10 @@
+// сып блоками
 package com.example.examplemod.content.vanilla;
 
 import com.example.examplemod.ExampleMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Items;
@@ -22,7 +24,11 @@ public final class VanillaCampfireEvents {
             return;
         }
 
-        if (event.getItemInHand() == null || !event.getItemInHand().is(Items.CAMPFIRE)) {
+        if (!(event.getEntity() instanceof LivingEntity living)) {
+            return;
+        }
+
+        if (!living.getMainHandItem().is(Items.CAMPFIRE) && !living.getOffhandItem().is(Items.CAMPFIRE)) {
             return;
         }
 
