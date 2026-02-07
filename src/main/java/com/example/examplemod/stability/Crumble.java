@@ -3,6 +3,7 @@ package com.example.examplemod.stability;
 import com.example.examplemod.content.block.GraveBlock;
 import com.example.examplemod.content.block.SupportBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.Blocks;
@@ -44,14 +45,21 @@ public final class Crumble {
             if (!st.getFluidState().isEmpty()) continue;
             if (st.getBlock() == Blocks.BEDROCK) continue;
             if (st.hasBlockEntity()) continue;
-            if (st.getBlock() instanceof SupportBlock) continue;
-            if (st.getBlock() instanceof GraveBlock) continue;
-            if (!isCrumbleBlock(st)) continue;
-            if (StabilityManager.isSafe(level, m.immutable())) continue;
             m.set(x, y, z);
             if (!level.getBlockState(m).isAir()) continue;
+            boolean isSupportOrGrave = st.getBlock() instanceof SupportBlock || st.getBlock() instanceof GraveBlock;
+            if (!isSupportOrGrave && !isCrumbleBlock(st)) continue;
+            BlockPos blockPos = m.immutable().above();
+            if (!isSupportOrGrave && StabilityManager.isSafe(level, blockPos)) continue;
             m.set(x, y + 1, z);
-            FallingBlockEntity.fall(level, m.immutable(), st);
+            if (st.getBlock() instanceof SupportBlock && st.getValue(SupportBlock.HALF) == DoubleBlockHalf.LOWER) {
+                level.setBlock(blockPos.above(), Blocks.AIR.defaultBlockState(), 3);
+                StabilityManager.unregisterCenter(level, blockPos);
+            }
+            if (st.getBlock() instanceof GraveBlock) {
+                StabilityManager.unregisterCenter(level, blockPos);
+            }
+            FallingBlockEntity.fall(level, blockPos, st);
         }
     }
 

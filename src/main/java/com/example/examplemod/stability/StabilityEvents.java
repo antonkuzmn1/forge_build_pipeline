@@ -41,6 +41,9 @@ public final class StabilityEvents {
                 StabilityManager.registerSupport(level, pos, support.type().radius());
             }
         }
+        if (state.getBlock() instanceof GraveBlock || state.getBlock() instanceof SupportBlock) {
+            Crumble.trigger(level, pos);
+        }
     }
 
     @SubscribeEvent
