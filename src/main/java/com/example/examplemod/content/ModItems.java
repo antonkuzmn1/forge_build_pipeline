@@ -15,6 +15,8 @@ public final class ModItems {
     public static final RegistryObject<Item> MUSHROOM_SUPPORT = ExampleMod.ITEMS.register("mushroom_support", () -> new BlockItem(ModBlocks.MUSHROOM_SUPPORT.get(), new Item.Properties()));
     public static final RegistryObject<Item> WOODEN_SUPPORT = ExampleMod.ITEMS.register("wooden_support", () -> new BlockItem(ModBlocks.WOODEN_SUPPORT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ROOTED_SOIL = ExampleMod.ITEMS.register("rooted_soil", () -> new BlockItem(ModBlocks.ROOTED_SOIL.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SHELL = ExampleMod.ITEMS.register("shell", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LARVA_BUCKET = ExampleMod.ITEMS.register("larva_bucket", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CAMPFIRE_UNLIT = ExampleMod.ITEMS.register("campfire_unlit", () -> new BlockItem(Blocks.CAMPFIRE, new Item.Properties()) {
         @Override
         public BlockState getPlacementState(net.minecraft.world.item.context.BlockPlaceContext context) {
@@ -35,5 +37,7 @@ public final class ModItems {
         WOODEN_SUPPORT.getId();
         ROOTED_SOIL.getId();
         CAMPFIRE_UNLIT.getId();
+        SHELL.getId();
+        LARVA_BUCKET.getId();
     }
 }
