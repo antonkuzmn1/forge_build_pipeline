@@ -8,6 +8,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.level.ChunkEvent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.chunk.ChunkPos;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -54,6 +57,24 @@ public final class StabilityEvents {
 
         if (!StabilityManager.isSafe(level, pos)) {
             Crumble.trigger(level, pos);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onChunkLoad(ChunkEvent.Load event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) {
+            return;
+        }
+        ChunkPos cp = event.getChunk().getPos();
+        int centerX = (cp.x << 4) + 8;
+        int centerZ = (cp.z << 4) + 8;
+        for (Player p : level.players()) {
+            double dx = Math.abs(p.getX() - centerX);
+            double dz = Math.abs(p.getZ() - centerZ);
+            if (dx <= 64 && dz <= 64) {
+                Crumble.triggerChunk(level, cp.x, cp.z);
+                break;
+            }
         }
     }
 }

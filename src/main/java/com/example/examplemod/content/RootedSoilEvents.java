@@ -29,7 +29,6 @@ public final class RootedSoilEvents {
         for (long p : RootedSoilData.get(level).positionsInChunk(cp)) {
             BlockPos pos = BlockPos.of(p);
             if (level.getBlockState(pos).is(ModBlocks.ROOTED_SOIL.get())) {
-                level.scheduleTick(pos, ModBlocks.ROOTED_SOIL.get(), 600);
             } else {
                 RootedSoilData.get(level).remove(pos);
             }
