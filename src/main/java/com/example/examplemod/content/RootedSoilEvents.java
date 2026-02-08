@@ -24,6 +24,7 @@ public final class RootedSoilEvents {
             return;
         }
 
+        ChunkPos cp = chunk.getPos();
         int baseX = cp.x << 4;
         int baseZ = cp.z << 4;
         int minY = level.getMinBuildHeight();
