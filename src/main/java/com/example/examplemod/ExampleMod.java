@@ -69,7 +69,7 @@ public class ExampleMod
         ModItems.bootstrap();
 
         ModEntities.ENTITY_TYPES.register(modEventBus);
-        EntityAttributeRegistry.register(modEventBus);
+        // attribute subscriber class handles attribute registration via MOD event bus
 
         modEventBus.addListener(this::commonSetup);
 
