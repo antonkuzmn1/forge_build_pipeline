@@ -70,7 +70,6 @@ public class ExampleMod
         ModEntities.ENTITY_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::onEntityAttributes);
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
@@ -98,10 +97,7 @@ public class ExampleMod
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
-    private void onEntityAttributes(final net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
-        event.put(ModEntities.NAUTILUS.get(), com.example.examplemod.content.entity.NautilusEntity.createAttributes().build());
-        event.put(ModEntities.LARVA.get(), com.example.examplemod.content.entity.LarvaEntity.createAttributes().build());
-    }
+    
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
