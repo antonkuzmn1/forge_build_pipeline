@@ -4,6 +4,7 @@ import com.example.examplemod.content.ModBlocks;
 import com.example.examplemod.content.ModItems;
 import com.example.examplemod.livecode.LiveCodeConfig;
 import com.example.examplemod.livecode.LiveCodeRuntime;
+import com.example.examplemod.content.entity.ModEntities;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
@@ -65,6 +66,8 @@ public class ExampleMod
 
         ModBlocks.bootstrap();
         ModItems.bootstrap();
+
+        ModEntities.ENTITY_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
