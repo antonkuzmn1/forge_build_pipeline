@@ -2,11 +2,5 @@
   "block.examplemod.grave": "Grave",
   "block.examplemod.mushroom_support": "Mushroom Support",
   "block.examplemod.wooden_support": "Wooden Support",
-  "block.examplemod.shell_block": "Shell Block",
-  "item.examplemod.shell": "Shell",
-  "item.examplemod.shell_block": "Shell Block",
-  "item.examplemod.larva_bucket": "Larva Bucket",
-  "entity.examplemod.nautilus": "Nautilus",
-  "entity.examplemod.shell": "Shell",
-  "entity.examplemod.larva": "Larva"
+  "block.examplemod.rooted_soil": "Rooted Soil"
 }
