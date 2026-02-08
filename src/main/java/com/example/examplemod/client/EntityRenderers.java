@@ -14,9 +14,15 @@ import net.minecraftforge.fml.common.Mod;
 public class EntityRenderers {
     @SubscribeEvent
     public static void register(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntities.NAUTILUS.get(), EmptyRenderer::new);
-        event.registerEntityRenderer(ModEntities.SHELL.get(), EmptyRenderer::new);
-        event.registerEntityRenderer(ModEntities.LARVA.get(), EmptyRenderer::new);
+        if (ModEntities.NAUTILUS.isPresent()) {
+            event.registerEntityRenderer(ModEntities.NAUTILUS.get(), EmptyRenderer::new);
+        }
+        if (ModEntities.SHELL.isPresent()) {
+            event.registerEntityRenderer(ModEntities.SHELL.get(), EmptyRenderer::new);
+        }
+        if (ModEntities.LARVA.isPresent()) {
+            event.registerEntityRenderer(ModEntities.LARVA.get(), EmptyRenderer::new);
+        }
     }
 
     private static class EmptyRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<Entity> {
