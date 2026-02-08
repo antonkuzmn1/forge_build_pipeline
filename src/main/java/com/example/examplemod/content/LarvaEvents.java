@@ -5,6 +5,7 @@ import com.example.examplemod.content.entity.LarvaEntity;
 import com.example.examplemod.content.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
