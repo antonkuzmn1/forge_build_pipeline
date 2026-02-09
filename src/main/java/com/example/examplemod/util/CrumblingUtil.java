@@ -100,7 +100,7 @@ public class CrumblingUtil
         if (entity != null)
         {
             entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            entity.setBlockState(state);
+            entity.blockState = state;
             level.addFreshEntity(entity);
         }
     }
