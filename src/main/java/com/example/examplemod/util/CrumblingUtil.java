@@ -7,6 +7,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.EntityType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -95,8 +96,13 @@ public class CrumblingUtil
 
         level.destroyBlock(pos, false);
 
-        FallingBlockEntity entity = new FallingBlockEntity(level, (double) pos.getX() + 0.5, (double) pos.getY(), (double) pos.getZ() + 0.5, state);
-        level.addFreshEntity(entity);
+        FallingBlockEntity entity = EntityType.FALLING_BLOCK.create(level);
+        if (entity != null)
+        {
+            entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            entity.setBlockState(state);
+            level.addFreshEntity(entity);
+        }
     }
 
     /**
