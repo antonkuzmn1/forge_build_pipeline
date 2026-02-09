@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "half=lower": { "model": "examplemod:block/wooden_support_lower" },
-    "half=upper": { "model": "examplemod:block/wooden_support_upper" }
-  }
-}

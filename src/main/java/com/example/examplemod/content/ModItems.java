@@ -3,28 +3,20 @@ package com.example.examplemod.content;
 import com.example.examplemod.ExampleMod;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public final class ModItems {
-    public static final RegistryObject<Item> GRAVE = ExampleMod.ITEMS.register("grave", () -> new BlockItem(ModBlocks.GRAVE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> MUSHROOM_SUPPORT = ExampleMod.ITEMS.register("mushroom_support", () -> new BlockItem(ModBlocks.MUSHROOM_SUPPORT.get(), new Item.Properties()));
-    public static final RegistryObject<Item> WOODEN_SUPPORT = ExampleMod.ITEMS.register("wooden_support", () -> new BlockItem(ModBlocks.WOODEN_SUPPORT.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ROOTED_SOIL = ExampleMod.ITEMS.register("rooted_soil", () -> new BlockItem(ModBlocks.ROOTED_SOIL.get(), new Item.Properties()));
-    public static final RegistryObject<Item> SHELL = ExampleMod.ITEMS.register("shell", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> LARVA_BUCKET = ExampleMod.ITEMS.register("larva_bucket", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> CAMPFIRE_UNLIT = ExampleMod.ITEMS.register("campfire_unlit", () -> new BlockItem(Blocks.CAMPFIRE, new Item.Properties()));
+public class ModItems
+{
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ExampleMod.MODID);
 
-    private ModItems() {
-    }
+    public static final RegistryObject<Item> MUSHROOM_SUPPORT_ITEM = ITEMS.register("mushroom_support",
+            () -> new BlockItem(ModBlocks.MUSHROOM_SUPPORT.get(), new Item.Properties()));
 
-    public static void bootstrap() {
-        GRAVE.getId();
-        MUSHROOM_SUPPORT.getId();
-        WOODEN_SUPPORT.getId();
-        ROOTED_SOIL.getId();
-        CAMPFIRE_UNLIT.getId();
-        SHELL.getId();
-        LARVA_BUCKET.getId();
+    public static void register(IEventBus modEventBus)
+    {
+        ITEMS.register(modEventBus);
     }
 }

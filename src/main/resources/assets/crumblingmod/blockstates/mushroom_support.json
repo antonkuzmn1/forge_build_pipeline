@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "crumblingmod:block/mushroom_support_lower"
+    },
+    "half=upper": {
+      "model": "crumblingmod:block/mushroom_support_upper"
+    }
+  }
+}

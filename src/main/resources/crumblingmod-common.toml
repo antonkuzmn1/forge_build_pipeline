@@ -1,0 +1,13 @@
+# Crumbling Mod Configuration
+# This file is used by Forge to configure the mod
+
+# These settings will appear in the mod configuration
+
+# The support block creates a safe zone around it
+supportBlockSafeZoneRadius=1
+
+# Enable detailed logging for crumbling events
+enableCrumblingLogging=false
+
+# Enable safe zone visualization (debug feature)
+visualizeSafeZones=false
