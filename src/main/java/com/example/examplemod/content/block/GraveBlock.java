@@ -1,5 +1,6 @@
 package com.example.examplemod.content.block;
 
+import com.example.examplemod.stability.Crumble;
 import com.example.examplemod.stability.StabilityManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +23,7 @@ public final class GraveBlock extends Block {
         if (state.getBlock() != newState.getBlock()) {
             if (level instanceof ServerLevel sl) {
                 StabilityManager.unregisterCenter(sl, pos);
+                Crumble.trigger(sl, pos);
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);

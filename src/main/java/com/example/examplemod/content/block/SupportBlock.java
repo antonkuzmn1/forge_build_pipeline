@@ -1,5 +1,6 @@
 package com.example.examplemod.content.block;
 
+import com.example.examplemod.stability.Crumble;
 import com.example.examplemod.stability.StabilityManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -167,6 +168,7 @@ public final class SupportBlock extends Block {
             if (level instanceof ServerLevel sl) {
                 BlockPos lower = half == DoubleBlockHalf.LOWER ? pos : pos.below();
                 StabilityManager.unregisterCenter(sl, lower);
+                Crumble.trigger(sl, lower);
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);

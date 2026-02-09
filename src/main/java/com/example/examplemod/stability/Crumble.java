@@ -64,6 +64,22 @@ public final class Crumble {
     }
 
     private static boolean isCrumbleBlock(BlockState st) {
-        return st.is(Blocks.STONE) || st.is(Blocks.GRANITE) || st.is(Blocks.ANDESITE) || st.is(Blocks.DIORITE) || st.is(Blocks.POLISHED_DIORITE);
+        // Dirt types
+        if (st.is(Blocks.DIRT) || st.is(Blocks.COARSE_DIRT) || st.is(Blocks.GRASS_BLOCK) || st.is(Blocks.PODZOL)) {
+            return true;
+        }
+        // Ice types
+        if (st.is(Blocks.ICE) || st.is(Blocks.PACKED_ICE) || st.is(Blocks.BLUE_ICE)) {
+            return true;
+        }
+        // Sandstone
+        if (st.is(Blocks.SANDSTONE) || st.is(Blocks.RED_SANDSTONE)) {
+            return true;
+        }
+        // Stone variants
+        if (st.is(Blocks.STONE) || st.is(Blocks.GRANITE) || st.is(Blocks.ANDESITE) || st.is(Blocks.DIORITE) || st.is(Blocks.POLISHED_DIORITE)) {
+            return true;
+        }
+        return false;
     }
 }
