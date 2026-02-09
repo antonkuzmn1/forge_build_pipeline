@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.EntityType;
+import com.example.examplemod.util.mixin.FallingBlockEntityAccessor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -100,7 +101,7 @@ public class CrumblingUtil
         if (entity != null)
         {
             entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            entity.blockState = state;
+            ((FallingBlockEntityAccessor) entity).setBlockState(state);
             level.addFreshEntity(entity);
         }
     }

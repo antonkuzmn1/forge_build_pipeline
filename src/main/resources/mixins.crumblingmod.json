@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.example.examplemod.util.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mixins.crumblingmod.refmap.json",
+  "mixins": [
+    "FallingBlockEntityAccessor"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
