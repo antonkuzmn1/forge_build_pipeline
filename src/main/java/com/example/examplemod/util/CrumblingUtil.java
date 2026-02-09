@@ -95,7 +95,7 @@ public class CrumblingUtil
 
         level.destroyBlock(pos, false);
 
-        FallingBlockEntity entity = new FallingBlockEntity(level, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, state);
+        FallingBlockEntity entity = new FallingBlockEntity(level, (double) pos.getX() + 0.5, (double) pos.getY(), (double) pos.getZ() + 0.5, state);
         level.addFreshEntity(entity);
     }
 

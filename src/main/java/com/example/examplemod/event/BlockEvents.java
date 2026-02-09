@@ -16,10 +16,12 @@ public class BlockEvents
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event)
     {
-        if (event.getLevel().isClientSide)
+        if (!(event.getLevel() instanceof Level))
             return;
 
         Level level = (Level) event.getLevel();
+        if (level.isClientSide)
+            return;
         BlockPos pos = event.getPos();
         Block block = event.getState().getBlock();
 
@@ -43,10 +45,12 @@ public class BlockEvents
     @SubscribeEvent
     public static void onNeighborChange(BlockEvent.NeighborNotifyEvent event)
     {
-        if (event.getLevel().isClientSide)
+        if (!(event.getLevel() instanceof Level))
             return;
 
         Level level = (Level) event.getLevel();
+        if (level.isClientSide)
+            return;
         BlockPos pos = event.getPos();
 
         // Check if a support block lost support
